@@ -43,6 +43,7 @@ app.use((req, res, next)=>{
 //extended: false means that the data will be parsed using the querystring library
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 app.get('/', (req, res, ) => {
     res.render('index', { title: 'Home' });
