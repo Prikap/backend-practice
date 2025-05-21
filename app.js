@@ -68,7 +68,10 @@ app.get('/register', (req, res) => {
     res.render('register');
 })
 
+//CRUD operations
+
 //post method to register the user
+//create operation to create a new user
 app.post('/register', async (req, res) => {
 
     //destructuring the data from the request body
@@ -83,6 +86,34 @@ app.post('/register', async (req, res) => {
     console.log(req.body);
     res.send(userDetail);
 })
+
+//read operation to get all the users
+app.get('/get-users', (req,res)=> {
+    //find method to find all the users
+    userModel.find().then((users)=> {
+        res.send(users);
+    })
+
+    //findOne method to find a single user
+    /*userModel.findOne({name:p}).then((users)=> {
+        res.send(users);
+    })*/
+})
+
+//upate operation to update a user
+app.get('/update-user', async (req,res) => {
+    //find method to find a user and update it
+    await userModel.findOneAndUpdate({name:'p'}, {name:'priyansh'});
+
+    res.send('User Updated');
+})
+
+//delete operation to delete a user
+app.get('/delete-user', async (req,res) => {
+    await userModel.findOneAndDelete({name:'ar'});
+    res.send('User Deleted');
+})
+
 
 app.post('/form-data', (req, res) => {
     console.log(req.body);
