@@ -22,6 +22,8 @@ server.listen(3000, () => {
 
 const express = require('express');
 const morgan = require('morgan');
+const userModel = require('./models/user');
+const dbConnection = require('./config/db');
 const app = express();
 
 //setting view engine to ejs
