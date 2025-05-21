@@ -45,10 +45,12 @@ app.use((req, res, next)=>{
 //extended: false means that the data will be parsed using the querystring library
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('public'));
 
+
 app.get('/', (req, res, ) => {
-    res.render('index', { title: 'Home' });
+    res.render('index');
 })
 
 app.get('/cat', (req, res) => {
@@ -60,6 +62,27 @@ app.get('/cat', (req, res) => {
     console.log(req.query);
     res.send('Form data received');
 })*/
+
+//get method to render the form
+app.get('/register', (req, res) => {
+    res.render('register');
+})
+
+//post method to register the user
+app.post('/register', async (req, res) => {
+
+    //destructuring the data from the request body
+    const {name, email, password} = req.body;
+
+    //create a new user object
+    const userDetail = await userModel.create({
+        name:name,
+        email:email,
+        password:password,
+    })
+    console.log(req.body);
+    res.send(userDetail);
+})
 
 app.post('/form-data', (req, res) => {
     console.log(req.body);
